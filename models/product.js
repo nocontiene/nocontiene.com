@@ -4,7 +4,6 @@
 
 import database from "infra/database.js";
 
-
 async function findAll() {
   let dbClient;
 
@@ -27,7 +26,10 @@ async function findById(id) {
   try {
     dbClient = await database.getNewClient();
 
-    const products = await dbClient.query("SELECT * FROM product WHERE id = $1;", [id]);
+    const products = await dbClient.query(
+      "SELECT * FROM product WHERE id = $1;",
+      [id],
+    );
     return products.rows;
   } catch (error) {
     console.error(error);
